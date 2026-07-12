@@ -15,13 +15,16 @@ class _SplashScreenState extends State<SplashScreen>
     with SingleTickerProviderStateMixin {
   late AnimationController _ctrl;
   late Animation<double> _fade;
+  late Animation<double> _scale;
 
   @override
   void initState() {
     super.initState();
     _ctrl = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 800));
+        vsync: this, duration: const Duration(milliseconds: 1000));
     _fade = CurvedAnimation(parent: _ctrl, curve: Curves.easeIn);
+    _scale = Tween<double>(begin: 0.8, end: 1.0)
+        .animate(CurvedAnimation(parent: _ctrl, curve: Curves.elasticOut));
     _ctrl.forward();
     _navigate();
   }
@@ -33,8 +36,7 @@ class _SplashScreenState extends State<SplashScreen>
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-          builder: (_) =>
-              loggedIn ? const HomeScreen() : const LoginScreen()),
+          builder: (_) => loggedIn ? const HomeScreen() : const LoginScreen()),
     );
   }
 
@@ -50,26 +52,34 @@ class _SplashScreenState extends State<SplashScreen>
       backgroundColor: AppTheme.primary,
       body: FadeTransition(
         opacity: _fade,
-        child: const Center(
+        child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Icons.account_balance_wallet,
-                  size: 80, color: Colors.white),
-              SizedBox(height: 20),
-              Text('Budgeting Tracker',
+              ScaleTransition(
+                scale: _scale,
+                child: Container(
+                  padding: const EdgeInsets.all(24),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withValues(alpha: 0.2),
+                    borderRadius: BorderRadius.circular(28),
+                  ),
+                  child: const Icon(Icons.account_balance_wallet_rounded,
+                      size: 64, color: Colors.white),
+                ),
+              ),
+              const SizedBox(height: 24),
+              const Text('Budgeting Tracker',
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 26,
                       fontWeight: FontWeight.bold)),
-              SizedBox(height: 8),
-              Text('Kelola keuanganmu dengan mudah',
-                  style:
-                      TextStyle(color: Colors.white70, fontSize: 14)),
-              SizedBox(height: 40),
-              CircularProgressIndicator(
-                  valueColor:
-                      AlwaysStoppedAnimation<Color>(Colors.white54)),
+              const SizedBox(height: 8),
+              const Text('Kelola keuanganmu dengan mudah',
+                  style: TextStyle(color: Colors.white70, fontSize: 14)),
+              const SizedBox(height: 48),
+              const CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white54)),
             ],
           ),
         ),

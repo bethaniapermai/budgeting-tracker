@@ -46,44 +46,34 @@ class _CustomTextFieldState extends State<CustomTextField> {
           validator: widget.validator,
           decoration: InputDecoration(
             hintText: widget.hint,
-            hintStyle:
-                const TextStyle(color: AppTheme.textLight, fontSize: 14),
+            hintStyle: const TextStyle(color: AppTheme.textLight, fontSize: 14),
             prefixIcon: widget.prefixIcon != null
-                ? Icon(widget.prefixIcon,
-                    color: AppTheme.primary, size: 20)
+                ? Icon(widget.prefixIcon, color: AppTheme.primary, size: 20)
                 : null,
             suffixIcon: widget.isPassword
                 ? IconButton(
                     icon: Icon(
-                        _obscure
-                            ? Icons.visibility_off
-                            : Icons.visibility,
+                        _obscure ? Icons.visibility_off : Icons.visibility,
                         color: AppTheme.textLight,
                         size: 20),
-                    onPressed: () =>
-                        setState(() => _obscure = !_obscure),
+                    onPressed: () => setState(() => _obscure = !_obscure),
                   )
                 : null,
             filled: true,
             fillColor: Colors.white,
             border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                borderSide:
-                    const BorderSide(color: Color(0xFFE2E8F0))),
+                borderRadius: BorderRadius.circular(12),
+                borderSide: const BorderSide(color: Color(0xFFF8BBD0))),
             enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                borderSide:
-                    const BorderSide(color: Color(0xFFE2E8F0))),
+                borderRadius: BorderRadius.circular(12),
+                borderSide: const BorderSide(color: Color(0xFFF8BBD0))),
             focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                borderSide: const BorderSide(
-                    color: AppTheme.primary, width: 2)),
+                borderRadius: BorderRadius.circular(12),
+                borderSide: const BorderSide(color: AppTheme.primary, width: 2)),
             errorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                borderSide:
-                    const BorderSide(color: AppTheme.expense)),
-            contentPadding: const EdgeInsets.symmetric(
-                horizontal: 14, vertical: 13),
+                borderRadius: BorderRadius.circular(12),
+                borderSide: const BorderSide(color: AppTheme.expense)),
+            contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 13),
           ),
         ),
       ],
